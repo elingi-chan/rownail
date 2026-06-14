@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rownail</title>
+
+    <link rel="stylesheet" type="text/css" href="assets/CSS/top.css">
+    <link rel="stylesheet" type="text/css" href="assets/CSS/common.css">
+    <link rel="stylesheet" type="text/css" href="assets/CSS/resset.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Shippori+Mincho&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="loading">
+        <img src="assets/image/logo.png" alt="logo">
+    </div>
+<main>
+    <video id="bg-video"autoplay muted loop playsinline>
+        <source src="assets/movie/bg.mp4" type="video/mp4">
+        <source src="assets/movie/bg.mp4" type="video/webm">
+    </video>
+
+        <header class="header">
+            <div class="header-inner">
+                <div class="header-logo">
+                    <a href="#top">
+                        <img class="header-logo_image" src="assets/image/logo.png" alt="logo">
+                    </a>
+                </div>
+                <!-- PC用ナビ -->
+                <nav class="nav-contents_menu">
+                <ul>
+                    <li><a href="#gallery">gallery</a></li>
+                    <li><a href="#menu">menu</a></li>
+                    <li><a href="#access">access</a></li>
+                    <li class="nav-reserve"><a href="#top">reserve</a></li>
+                </ul>
+        </nav>
+        </header>  
+                <!-- スマホ用 -->
+                <input id="nav-input" class="none" type="checkbox">
+                <label id="nav-open" for="nav-input"><span></span></label>
+                <label id="nav-close" class="none" for="nav-input"></label>
+            <nav id="nav-content">
+                <ul>
+                    <li><a href="#gallery">gallery</a></li>
+                    <li><a href="#menu">menu</a></li>
+                    <li><a href="#access">access</a></li>
+                    <li class="nav-reserve"><a href="#top">reserve</a></li>
+                </ul>
+            </nav> 
+
+    <div class="section-top" id="top">
+        <div class="section-top_image"></div>
+        <div class="section-top_title_left">Row</div>
+        <div class="section-top_MV_shadow">
+            <div class="section-top_MV">
+                <div class="section-top_MV_inner">
+                    <img class="slide" src="assets/image/nail_1_2.jpg" alt="nail_1">
+                    <img class="slide" src="assets/image/nail_2_2.JPG" alt="nail_2">
+                    <img class="slide" src="assets/image/nail_3_2.jpg" alt="nail_3">
+                </div>
+            </div>
+        </div>
+        <div class="section-top_title_right">nail</div>
+    </div>   
+    <div class="section-description">
+        <div class="description-images">
+        <img class="parallax-img img-1 fadein" src="assets/image/description_1_2.jpg" alt="nai1">
+        <img class="parallax-img img-2 fadein" src="assets/image/description_2_2.jpg" alt="nail2">
+        <img class="parallax-img img-3 fadein" src="assets/image/description_3_2.jpg" alt="nail3">
+        <img class="parallax-img img-4 fadein" src="assets/image/description_4_2.jpg" alt="nail4">
+    </div>
+        <p class="description-p fadein">自然の繊細で<br>無機質な永遠の美しさを<br>自分の爪に</p>
+    </div>
+
+    <div class="section-gallery" id="gallery">
+        <div class="section-title fadein">GALLERY</div>
+        <div class="gallery-inner fadein">
+            <button class="gallery-btn prev">&#9664;</button>
+            <div class="gallery-track-wrap">
+            <div class="gallery-track">
+                <div class="gallery-item"><img src="assets/image/gallery_1_2.webp" alt="gallery-nail1"></div>
+                <div class="gallery-item"><img src="assets/image/gallery_2_2.jpg" alt="gallery-nail2"></div>
+                <div class="gallery-item"><img src="assets/image/gallery_3_2.jpg" alt="gallery-nail3"></div>
+                <div class="gallery-item"><img src="assets/image/gallery_4_2.jpg" alt="gallery-nail4"></div>
+            </div>
+            </div>
+            <button class="gallery-btn next">&#9654;</button>
+        </div>
+    </div>
+
+    <div class="section-menu" id="menu">
+        <div class="section-title fadein">MENU</div>
+        <div class="menu-inner fadein">
+            <p class="menu-inner_title">当店はハンドジェルネイルのみのご案内です</p>
+            <div class="menu-inner_wrap">
+                <ul class="menu-inner_name">
+                    <li>ワンカラー</li>
+                    <li>グラデーション</li>
+                    <li>ワンポイントデザイン<br><span>(ワンカラーorグラデーションに＋)</span></li>
+                </ul>
+                <ul class="menu-inner_price">
+                    <li>¥6,000</li>
+                    <li>¥7,000</li>
+                    <li>¥1,000/1本</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-access" id="access">
+        <div class="section-title fadeIn">ACCESS</div>
+        <div class="access-inner fadein">
+            <div class="access-inner_wrap">
+                <ul class="access-inner_title">
+                    <li>営業時間</li>
+                    <li>定休日</li>
+                    <li>住所</li>
+                    <li>アクセス</li>
+                </ul>
+                <ul class="access-inner_data">
+                    <li>10:00~19:00</li>
+                    <li>火、水</li>
+                    <li>東京都草ヶ岡市雪甘2-11-16  ISMビル1F</li>
+                    <li>草ヶ丘駅北口から徒歩10分</li>
+                </ul>
+            </div>
+            <img src="assets/image/map.png" alt="地図">
+        </div>
+    </div>
+    <footer>
+        <img class="footer-image" src="assets/image/logo.png" alt="">
+        <div class="footer-copy">Row nail 2026</div>
+    </footer>
+
+    <!-- モーダル -->
+<div id="modal">
+    <div id="modal-overlay"></div>
+    <div id="modal-content">
+        <img id="modal-img" src="" alt="">
+        <button id="modal-close">&#10005;</button>
+    </div>
+</div>
+
+</main>
+
+<script src="assets/JS/slider.JS"></script>
+<script src="assets/JS/parallx.JS"></script>
+<script src="assets/JS/slider_gallery.JS"></script>
+<script src="assets/JS/fadein.JS"></script>
+<script src="assets/JS/loading.JS"></script>
+<script src="assets/JS/modal.JS"></script>
+<script src="assets/JS/nav.JS"></script>
+
+</body>
+</html>
