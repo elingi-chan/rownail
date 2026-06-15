@@ -1,98 +1,83 @@
 (() => {
     const track = document.querySelector('.gallery-track');
+    const trackWrap = document.querySelector('.gallery-track-wrap');
     const originalItems = Array.from(track.querySelectorAll('.gallery-item'));
     const gap = 20;
-    let galleryCurrent = 0;
-    let autoTimer;
+    let position = 0;
+    let animationId;
+    let isDragging = false;
+    let prevX = 0;
 
-    originalItems.forEach(item => {
-        track.appendChild(item.cloneNode(true));
-    });
-    originalItems.forEach(item => {
-        track.insertBefore(item.cloneNode(true), track.firstChild);
-    });
+    originalItems.forEach(item => track.appendChild(item.cloneNode(true)));
+    originalItems.forEach(item => track.appendChild(item.cloneNode(true)));
 
-    const total = originalItems.length;
-
-    function getItemWidth() {
-        return track.querySelectorAll('.gallery-item')[0].offsetWidth + gap;
+    function getSetWidth() {
+        return (track.querySelectorAll('.gallery-item')[0].offsetWidth + gap) * originalItems.length;
     }
 
-    function init() {
-        galleryCurrent = total;
+    function setPosition(pos) {
+        const w = getSetWidth();
+        position = ((pos % w) + w) % w;
         track.style.transition = 'none';
-        track.style.transform = `translateX(-${galleryCurrent * getItemWidth()}px)`;
+        track.style.transform = `translateX(-${position}px)`;
     }
-
-    function moveTo(index) {
-        galleryCurrent = index;
-        track.style.transition = 'transform 0.6s ease';
-        track.style.transform = `translateX(-${galleryCurrent * getItemWidth()}px)`;
-    }
-
-    track.addEventListener('transitionend', () => {
-        if (galleryCurrent >= total * 2) {
-            galleryCurrent = total;
-            track.style.transition = 'none';
-            track.style.transform = `translateX(-${galleryCurrent * getItemWidth()}px)`;
-        }
-        if (galleryCurrent <= 0) {
-            galleryCurrent = total;
-            track.style.transition = 'none';
-            track.style.transform = `translateX(-${galleryCurrent * getItemWidth()}px)`;
-        }
-    });
 
     function startAuto() {
-        autoTimer = setInterval(() => {
-            moveTo(galleryCurrent + 1);
-        }, 3000);
+        cancelAnimationFrame(animationId);
+        function loop() {
+            setPosition(position + 0.5);
+            animationId = requestAnimationFrame(loop);
+        }
+        animationId = requestAnimationFrame(loop);
     }
 
-    document.querySelector('.prev').addEventListener('click', () => {
-        clearInterval(autoTimer);
-        moveTo(galleryCurrent - 1);
+    function stopAuto() {
+        cancelAnimationFrame(animationId);
+    }
+
+    // PCドラッグ
+    trackWrap.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        prevX = e.clientX;
+        stopAuto();
+        trackWrap.style.cursor = 'grabbing';
+        e.preventDefault();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const diff = prevX - e.clientX;
+        prevX = e.clientX;
+        setPosition(position + diff);
+    });
+
+    window.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        trackWrap.style.cursor = 'grab';
         startAuto();
     });
 
-    document.querySelector('.next').addEventListener('click', () => {
-        clearInterval(autoTimer);
-        moveTo(galleryCurrent + 1);
-        startAuto();
-    });
-
-    const trackWrap = document.querySelector('.gallery-track-wrap');
+    // スマホスワイプ
     let touchStartX = 0;
-    let touchEndX = 0;
-    let isDragging = false;
+    let touchStartPos = 0;
 
     trackWrap.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
-        isDragging = true;
+        touchStartPos = position;
+        stopAuto();
     }, { passive: true });
 
     trackWrap.addEventListener('touchmove', (e) => {
-        if (!isDragging) return;
         e.preventDefault();
+        const diff = touchStartX - e.touches[0].clientX;
+        setPosition(touchStartPos + diff);
     }, { passive: false });
 
-    trackWrap.addEventListener('touchend', (e) => {
-        if (!isDragging) return;
-        isDragging = false;
-        touchEndX = e.changedTouches[0].clientX;
-        const diff = touchStartX - touchEndX;
-
-        if (Math.abs(diff) > 30) {
-            clearInterval(autoTimer);
-            if (diff > 0) {
-                moveTo(galleryCurrent + 1);
-            } else {
-                moveTo(galleryCurrent - 1);
-            }
-            startAuto();
-        }
+    trackWrap.addEventListener('touchend', () => {
+        startAuto();
     }, { passive: true });
 
-    init();
+    trackWrap.style.cursor = 'grab';
     startAuto();
 })();
